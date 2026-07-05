@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Repository Tech Radar</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+<header class="pop-header">
+  <div class="brand">
+    <span class="brand-mark"></span>
+    <span>Repository <strong>Tech Radar</strong></span>
+  </div>
+  <span class="mode-badge" id="modeBadge">Free</span>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="search">🔍 Search</button>
+  <button class="tab" data-tab="saved">📌 Saved <span class="count" id="savedCount">0</span></button>
+  <button class="tab" data-tab="premium">✨ Premium</button>
+</nav>
+
+<!-- SEARCH TAB -->
+<section class="panel active" id="panel-search">
+  <form id="searchForm" class="search-row">
+    <input type="search" id="searchInput" placeholder="Search tools, repos, AI projects…" autocomplete="off">
+    <button type="submit" class="btn btn-primary">Go</button>
+  </form>
+  <div class="chip-row" id="sourceChips">
+    <button class="fchip active" data-source="all">All</button>
+    <button class="fchip" data-source="GitHub">GitHub</button>
+    <button class="fchip" data-source="Hugging Face">HF</button>
+    <button class="fchip" data-source="npm">npm</button>
+    <button class="fchip" data-source="PyPI">PyPI</button>
+    <button class="fchip" data-source="Docker Hub">Docker</button>
+  </div>
+  <div class="chip-row suggest" id="suggestChips">
+    <button class="qchip" data-q="local RAG app">local RAG</button>
+    <button class="qchip" data-q="offline OCR">offline OCR</button>
+    <button class="qchip" data-q="speech to text">speech to text</button>
+    <button class="qchip" data-q="workflow automation">automation</button>
+  </div>
+  <p class="hint" id="searchHint">Type a topic or tap a suggestion.</p>
+  <div class="list" id="resultsList"></div>
+</section>
+
+<!-- SAVED TAB -->
+<section class="panel" id="panel-saved">
+  <div class="saved-toolbar">
+    <select id="savedFilter">
+      <option value="all">All categories</option>
+      <option value="To evaluate">To evaluate</option>
+      <option value="For a project">For a project</option>
+      <option value="Learning">Learning</option>
+      <option value="Client work">Client work</option>
+    </select>
+    <button class="btn btn-chip" id="exportSavedJson">Export JSON</button>
+    <button class="btn btn-chip" id="exportSavedCsv">Export CSV</button>
+  </div>
+  <div class="list" id="savedList"></div>
+  <p class="hint" id="savedEmpty">Nothing saved yet. Find a project in Search and tap 📌 to add it to your radar.</p>
+</section>
+
+<!-- PREMIUM TAB -->
+<section class="panel" id="panel-premium">
+  <div class="premium-box">
+    <h3>✨ AI analysis layer</h3>
+    <p>Unlock plain-language summaries, risk &amp; maintenance review, license warnings,
+       comparisons, installation roadmaps and “best tool for my need” recommendations.</p>
+    <ul class="locked-list">
+      <li>🔒 AI repository summary</li>
+      <li>🔒 Technical feasibility &amp; scoring</li>
+      <li>🔒 Risk &amp; maintenance review</li>
+      <li>🔒 License &amp; reuse warning</li>
+      <li>🔒 Repository comparison</li>
+      <li>🔒 Installation roadmap</li>
+    </ul>
+    <label class="field">License code
+      <input type="text" id="licenseInput" placeholder="e.g. RADAR-XXXX-XXXX">
+    </label>
+    <label class="field">Or your own AI API key
+      <input type="password" id="apiKeyInput" placeholder="sk-…">
+    </label>
+    <button class="btn btn-premium" id="activateBtn">Activate premium</button>
+    <p class="hint" id="activateMsg">Need a license? <a href="https://oprbguitar.github.io/Hero-radar/#contact" target="_blank" rel="noopener">Contact us for activation</a>.</p>
+  </div>
+</section>
+
+<footer class="pop-footer">
+  <a href="https://oprbguitar.github.io/Hero-radar/" target="_blank" rel="noopener">Open full dashboard ↗</a>
+</footer>
+
+<script src="data.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

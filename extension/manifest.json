@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Repository Tech Radar",
+  "version": "1.0.0",
+  "description": "Search, save, classify and analyze open-source projects and emerging tech resources from GitHub, Hugging Face, npm, PyPI and more.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Repository Tech Radar"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage"]
+}
