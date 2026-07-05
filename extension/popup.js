@@ -69,8 +69,8 @@
     const list = $("#resultsList");
     list.innerHTML = "";
     $("#searchHint").textContent = results.length
-      ? `${results.length} project${results.length === 1 ? "" : "s"} found${q ? ` for “${q}”` : ""}.`
-      : "No matches — try another keyword or source.";
+      ? `${results.length} proyecto${results.length === 1 ? "" : "s"} encontrado${results.length === 1 ? "" : "s"}${q ? ` para «${q}»` : ""}.`
+      : "Sin coincidencias — prueba otra palabra clave u otra fuente.";
     results.forEach(item => list.appendChild(resultItem(item)));
   }
 
@@ -86,10 +86,10 @@
         <span class="status"></span><span class="m-diff"></span>
       </div>
       <div class="item-actions">
-        <a class="abtn" target="_blank" rel="noopener">Open ↗</a>
-        <button class="abtn save-btn">📌 Save</button>
+        <a class="abtn" target="_blank" rel="noopener">Abrir ↗</a>
+        <button class="abtn save-btn">📌 Guardar</button>
         <button class="abtn fav-btn">☆ Fav</button>
-        <button class="abtn ai ai-btn">🔒 AI</button>
+        <button class="abtn ai ai-btn">🔒 IA</button>
       </div>`;
     el.querySelector(".item-name").textContent = item.name;
     el.querySelector(".item-src").textContent = item.source;
@@ -99,7 +99,7 @@
     el.querySelector(".m-stars").textContent = RadarData.formatStars(item.stars);
     const st = el.querySelector(".status");
     st.textContent = item.status;
-    st.classList.add(item.status.split(" ")[0]);
+    st.classList.add({ "Activo": "Active", "Mantenido": "Maintained", "Poca actividad": "Low" }[item.status] || "Maintained");
     el.querySelector(".m-diff").textContent = item.difficulty;
     el.querySelector("a").href = item.url;
 
@@ -109,12 +109,12 @@
 
     saveBtn.addEventListener("click", async () => {
       if (saved[item.id]) delete saved[item.id];
-      else saved[item.id] = { item, category: "To evaluate", favorite: false };
+      else saved[item.id] = { item, category: "Por evaluar", favorite: false };
       await persist();
       syncButtons();
     });
     favBtn.addEventListener("click", async () => {
-      if (!saved[item.id]) saved[item.id] = { item, category: "To evaluate", favorite: true };
+      if (!saved[item.id]) saved[item.id] = { item, category: "Por evaluar", favorite: true };
       else saved[item.id].favorite = !saved[item.id].favorite;
       await persist();
       syncButtons();
@@ -123,7 +123,7 @@
 
     function syncButtons() {
       const entry = saved[item.id];
-      saveBtn.textContent = entry ? "📌 Saved" : "📌 Save";
+      saveBtn.textContent = entry ? "📌 Guardado" : "📌 Guardar";
       saveBtn.classList.toggle("saved", !!entry);
       favBtn.textContent = entry && entry.favorite ? "★ Fav" : "☆ Fav";
       favBtn.classList.toggle("fav", !!(entry && entry.favorite));
@@ -137,16 +137,16 @@
       $$(".panel").forEach(p => p.classList.remove("active"));
       document.querySelector('[data-tab="premium"]').classList.add("active");
       $("#panel-premium").classList.add("active");
-      setMsg(`AI analysis of “${item.name}” is a premium feature. Activate below to unlock it.`, "err");
+      setMsg(`El análisis IA de «${item.name}» es una función premium. Actívala abajo para desbloquearla.`, "err");
       return;
     }
     alert(
-      `AI analysis — ${item.name}\n\n` +
-      `Summary: ${item.desc}\n\n` +
-      `Health: ${item.status}, last update ${item.updated}.\n` +
-      `License: ${item.license} — review reuse conditions before embedding commercially.\n` +
-      `Difficulty: ${item.difficulty}. Best fit: ${item.useCase}.\n\n` +
-      `(Demo output — connect a live AI provider for full analysis.)`
+      `Análisis IA — ${item.name}\n\n` +
+      `Resumen: ${item.desc}\n\n` +
+      `Salud: ${item.status}, última actualización ${item.updated}.\n` +
+      `Licencia: ${item.license} — revisa las condiciones de reutilización antes de integrarlo comercialmente.\n` +
+      `Dificultad: ${item.difficulty}. Mejor encaje: ${item.useCase}.\n\n` +
+      `(Salida de demostración — conecta un proveedor de IA real para el análisis completo.)`
     );
   }
 
@@ -170,12 +170,12 @@
         <div class="item-top"><span class="item-name"></span><span class="item-src"></span></div>
         <div class="item-meta"><span class="m-lang"></span><span>⚖ <span class="m-lic"></span></span><span class="m-fav"></span></div>
         <select class="cat-select">
-          <option>To evaluate</option><option>For a project</option>
-          <option>Learning</option><option>Client work</option>
+          <option>Por evaluar</option><option>Para un proyecto</option>
+          <option>Aprendizaje</option><option>Trabajo con clientes</option>
         </select>
         <div class="item-actions">
-          <a class="abtn" target="_blank" rel="noopener">Open ↗</a>
-          <button class="abtn remove-btn">🗑 Remove</button>
+          <a class="abtn" target="_blank" rel="noopener">Abrir ↗</a>
+          <button class="abtn remove-btn">🗑 Quitar</button>
         </div>`;
       el.querySelector(".item-name").textContent = (entry.favorite ? "★ " : "") + entry.item.name;
       el.querySelector(".item-src").textContent = entry.item.source;
@@ -236,14 +236,14 @@
     const code = $("#licenseInput").value.trim();
     const key = $("#apiKeyInput").value.trim();
     if (!code && !key) {
-      setMsg("Enter a license code or an API key to activate premium.", "err");
+      setMsg("Ingresa un código de licencia o una clave de API para activar premium.", "err");
       return;
     }
     premium = true;
     await store.set("radar_premium", { active: true, method: code ? "license" : "api-key" });
     $("#modeBadge").textContent = "Premium";
     $("#modeBadge").classList.add("premium");
-    setMsg("Premium activated ✓ — AI analysis is now available on every result.", "ok");
+    setMsg("Premium activado ✓ — el análisis con IA ya está disponible en cada resultado.", "ok");
   });
 
   /* ---- init ---- */
@@ -254,7 +254,7 @@
     if (premium) {
       $("#modeBadge").textContent = "Premium";
       $("#modeBadge").classList.add("premium");
-      setMsg("Premium is active on this browser.", "ok");
+      setMsg("Premium está activo en este navegador.", "ok");
     }
     $("#savedCount").textContent = Object.keys(saved).length;
     renderResults();

@@ -72,14 +72,14 @@
     grid.innerHTML = "";
     emptyMsg.hidden = currentResults.length > 0;
     countEl.textContent = currentResults.length
-      ? `${currentResults.length} project${currentResults.length === 1 ? "" : "s"} found` +
-        (currentQuery ? ` for “${currentQuery}”` : " (curated index)")
-      : "No results for this combination.";
+      ? `${currentResults.length} proyecto${currentResults.length === 1 ? "" : "s"} encontrado${currentResults.length === 1 ? "" : "s"}` +
+        (currentQuery ? ` para «${currentQuery}»` : " (índice curado)")
+      : "Sin resultados para esta combinación.";
     currentResults.forEach(item => grid.appendChild(card(item)));
   }
 
-  const STATUS_CLASS = { "Active": "status-active", "Maintained": "status-maintained", "Low activity": "status-low" };
-  const DIFF_DOTS = { "Beginner": "●○○", "Intermediate": "●●○", "Advanced": "●●●" };
+  const STATUS_CLASS = { "Activo": "status-active", "Mantenido": "status-maintained", "Poca actividad": "status-low" };
+  const DIFF_DOTS = { "Principiante": "●○○", "Intermedio": "●●○", "Avanzado": "●●●" };
 
   function card(item) {
     const el = document.createElement("article");
@@ -97,11 +97,11 @@
         <span>★ <strong class="m-stars"></strong></span>
         <span>⟳ <span class="m-updated"></span></span>
         <span class="status-pill"></span>
-        <span title="Difficulty: ${item.difficulty}">Difficulty <span class="diff-dots"></span></span>
+        <span title="Dificultad: ${item.difficulty}">Dificultad <span class="diff-dots"></span></span>
       </div>
       <div class="result-actions">
-        <a class="btn btn-ghost" target="_blank" rel="noopener">Open source ↗</a>
-        <button class="btn btn-premium btn-analyze" type="button">🔒 AI analysis</button>
+        <a class="btn btn-ghost" target="_blank" rel="noopener">Abrir fuente ↗</a>
+        <button class="btn btn-premium btn-analyze" type="button">🔒 Análisis IA</button>
       </div>`;
     el.querySelector(".result-name").textContent = item.name;
     el.querySelector(".chip").textContent = item.source;
@@ -122,10 +122,10 @@
     el.querySelector(".diff-dots").textContent = DIFF_DOTS[item.difficulty] || "●○○";
     el.querySelector("a").href = item.url;
     el.querySelector(".btn-analyze").addEventListener("click", () =>
-      openModal("AI analysis: " + item.name,
-        `The premium AI layer explains what ${item.name} does, whether it is actively maintained, ` +
-        `its risks, license implications (${item.license}), installation complexity and how it could ` +
-        `fit your product or workflow. Activate premium to unlock the full analysis.`));
+      openModal("Análisis IA: " + item.name,
+        `La capa premium de IA explica qué hace ${item.name}, si tiene mantenimiento activo, ` +
+        `sus riesgos, las implicaciones de su licencia (${item.license}), la complejidad de instalación y cómo podría ` +
+        `encajar en tu producto o flujo de trabajo. Activa premium para desbloquear el análisis completo.`));
     return el;
   }
 
@@ -155,32 +155,32 @@
   }
 
   function toMarkdown(items) {
-    let md = `# Repository Tech Radar — export\n\nQuery: ${currentQuery || "(curated index)"} · ${items.length} projects · ${new Date().toISOString().slice(0, 10)}\n\n`;
+    let md = `# Repository Tech Radar — exportación\n\nBúsqueda: ${currentQuery || "(índice curado)"} · ${items.length} proyectos · ${new Date().toISOString().slice(0, 10)}\n\n`;
     items.forEach(i => {
       md += `## ${i.name} (${i.source})\n\n${i.desc}\n\n` +
-        `- **Language:** ${i.language} · **License:** ${i.license} · **Stars:** ${RadarData.formatStars(i.stars)}\n` +
-        `- **Status:** ${i.status} · **Difficulty:** ${i.difficulty} · **Updated:** ${i.updated}\n` +
-        `- **Use case:** ${i.useCase}\n- **Link:** ${i.url}\n\n`;
+        `- **Lenguaje:** ${i.language} · **Licencia:** ${i.license} · **Estrellas:** ${RadarData.formatStars(i.stars)}\n` +
+        `- **Estado:** ${i.status} · **Dificultad:** ${i.difficulty} · **Actualizado:** ${i.updated}\n` +
+        `- **Caso de uso:** ${i.useCase}\n- **Enlace:** ${i.url}\n\n`;
     });
     return md;
   }
 
   function pdfReport(items) {
     const w = window.open("", "_blank");
-    if (!w) { openModal("Report blocked", "Your browser blocked the report window. Allow pop-ups for this page and try again."); return; }
+    if (!w) { openModal("Informe bloqueado", "Tu navegador bloqueó la ventana del informe. Permite las ventanas emergentes para esta página e inténtalo de nuevo."); return; }
     const rows = items.map(i =>
       `<tr><td><strong>${i.name}</strong><br><small>${i.source}</small></td><td>${i.desc}</td>` +
       `<td>${i.language}<br>${i.license}</td><td>${i.status}<br>★ ${RadarData.formatStars(i.stars)}</td></tr>`).join("");
-    w.document.write(`<!DOCTYPE html><html><head><title>Tech Radar Report</title><style>
+    w.document.write(`<!DOCTYPE html><html><head><title>Informe Tech Radar</title><style>
       body{font-family:Segoe UI,Arial,sans-serif;margin:2rem;color:#111}
       h1{font-size:1.4rem} table{border-collapse:collapse;width:100%;font-size:.85rem}
       td,th{border:1px solid #ccc;padding:.5rem;text-align:left;vertical-align:top}
       th{background:#f1f5f9} small{color:#555}
       @media print{button{display:none}}</style></head><body>
-      <h1>Repository Tech Radar — Report</h1>
-      <p>Query: <strong>${currentQuery || "curated index"}</strong> · ${items.length} projects · ${new Date().toLocaleDateString()}</p>
-      <table><tr><th>Project</th><th>Description</th><th>Stack / License</th><th>Health</th></tr>${rows}</table>
-      <p><button onclick="window.print()">Print / Save as PDF</button></p></body></html>`);
+      <h1>Repository Tech Radar — Informe</h1>
+      <p>Búsqueda: <strong>${currentQuery || "índice curado"}</strong> · ${items.length} proyectos · ${new Date().toLocaleDateString()}</p>
+      <table><tr><th>Proyecto</th><th>Descripción</th><th>Stack / Licencia</th><th>Salud</th></tr>${rows}</table>
+      <p><button onclick="window.print()">Imprimir / Guardar como PDF</button></p></body></html>`);
     w.document.close();
   }
 
@@ -217,11 +217,11 @@
     cardEl.addEventListener("click", () =>
       openModal(cardEl.dataset.feature,
         cardEl.querySelector("p").textContent +
-        " This feature is part of the premium AI layer — activate it with a license code or your own API key."));
+        " Esta función forma parte de la capa premium de IA — actívala con un código de licencia o tu propia clave de API."));
   });
 
   /* ---- initial render: curated highlights ---- */
   currentResults = RadarData.search("", {}).slice(0, 6);
   render();
-  countEl.textContent = "Showing 6 curated highlights — run a search to explore the full index.";
+  countEl.textContent = "Mostrando 6 proyectos destacados — ejecuta una búsqueda para explorar todo el índice.";
 })();

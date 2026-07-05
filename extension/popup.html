@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <title>Repository Tech Radar</title>
@@ -12,23 +12,23 @@
     <span class="brand-mark"></span>
     <span>Repository <strong>Tech Radar</strong></span>
   </div>
-  <span class="mode-badge" id="modeBadge">Free</span>
+  <span class="mode-badge" id="modeBadge">Gratis</span>
 </header>
 
 <nav class="tabs">
-  <button class="tab active" data-tab="search">🔍 Search</button>
-  <button class="tab" data-tab="saved">📌 Saved <span class="count" id="savedCount">0</span></button>
+  <button class="tab active" data-tab="search">🔍 Buscar</button>
+  <button class="tab" data-tab="saved">📌 Guardados <span class="count" id="savedCount">0</span></button>
   <button class="tab" data-tab="premium">✨ Premium</button>
 </nav>
 
-<!-- SEARCH TAB -->
+<!-- PESTAÑA BUSCAR -->
 <section class="panel active" id="panel-search">
   <form id="searchForm" class="search-row">
-    <input type="search" id="searchInput" placeholder="Search tools, repos, AI projects…" autocomplete="off">
-    <button type="submit" class="btn btn-primary">Go</button>
+    <input type="search" id="searchInput" placeholder="Busca herramientas, repos, proyectos de IA…" autocomplete="off">
+    <button type="submit" class="btn btn-primary">Ir</button>
   </form>
   <div class="chip-row" id="sourceChips">
-    <button class="fchip active" data-source="all">All</button>
+    <button class="fchip active" data-source="all">Todas</button>
     <button class="fchip" data-source="GitHub">GitHub</button>
     <button class="fchip" data-source="Hugging Face">HF</button>
     <button class="fchip" data-source="npm">npm</button>
@@ -36,59 +36,59 @@
     <button class="fchip" data-source="Docker Hub">Docker</button>
   </div>
   <div class="chip-row suggest" id="suggestChips">
-    <button class="qchip" data-q="local RAG app">local RAG</button>
-    <button class="qchip" data-q="offline OCR">offline OCR</button>
-    <button class="qchip" data-q="speech to text">speech to text</button>
-    <button class="qchip" data-q="workflow automation">automation</button>
+    <button class="qchip" data-q="app RAG local">RAG local</button>
+    <button class="qchip" data-q="OCR sin conexión">OCR sin conexión</button>
+    <button class="qchip" data-q="voz a texto">voz a texto</button>
+    <button class="qchip" data-q="automatización de flujos">automatización</button>
   </div>
-  <p class="hint" id="searchHint">Type a topic or tap a suggestion.</p>
+  <p class="hint" id="searchHint">Escribe un tema o toca una sugerencia.</p>
   <div class="list" id="resultsList"></div>
 </section>
 
-<!-- SAVED TAB -->
+<!-- PESTAÑA GUARDADOS -->
 <section class="panel" id="panel-saved">
   <div class="saved-toolbar">
     <select id="savedFilter">
-      <option value="all">All categories</option>
-      <option value="To evaluate">To evaluate</option>
-      <option value="For a project">For a project</option>
-      <option value="Learning">Learning</option>
-      <option value="Client work">Client work</option>
+      <option value="all">Todas las categorías</option>
+      <option value="Por evaluar">Por evaluar</option>
+      <option value="Para un proyecto">Para un proyecto</option>
+      <option value="Aprendizaje">Aprendizaje</option>
+      <option value="Trabajo con clientes">Trabajo con clientes</option>
     </select>
-    <button class="btn btn-chip" id="exportSavedJson">Export JSON</button>
-    <button class="btn btn-chip" id="exportSavedCsv">Export CSV</button>
+    <button class="btn btn-chip" id="exportSavedJson">Exportar JSON</button>
+    <button class="btn btn-chip" id="exportSavedCsv">Exportar CSV</button>
   </div>
   <div class="list" id="savedList"></div>
-  <p class="hint" id="savedEmpty">Nothing saved yet. Find a project in Search and tap 📌 to add it to your radar.</p>
+  <p class="hint" id="savedEmpty">Aún no has guardado nada. Encuentra un proyecto en Buscar y toca 📌 para añadirlo a tu radar.</p>
 </section>
 
-<!-- PREMIUM TAB -->
+<!-- PESTAÑA PREMIUM -->
 <section class="panel" id="panel-premium">
   <div class="premium-box">
-    <h3>✨ AI analysis layer</h3>
-    <p>Unlock plain-language summaries, risk &amp; maintenance review, license warnings,
-       comparisons, installation roadmaps and “best tool for my need” recommendations.</p>
+    <h3>✨ Capa de análisis con IA</h3>
+    <p>Desbloquea resúmenes en lenguaje claro, revisión de riesgo y mantenimiento, alertas de licencia,
+       comparaciones, hojas de ruta de instalación y recomendaciones de «la mejor herramienta para mi caso».</p>
     <ul class="locked-list">
-      <li>🔒 AI repository summary</li>
-      <li>🔒 Technical feasibility &amp; scoring</li>
-      <li>🔒 Risk &amp; maintenance review</li>
-      <li>🔒 License &amp; reuse warning</li>
-      <li>🔒 Repository comparison</li>
-      <li>🔒 Installation roadmap</li>
+      <li>🔒 Resumen del repositorio con IA</li>
+      <li>🔒 Viabilidad técnica y puntuación</li>
+      <li>🔒 Revisión de riesgo y mantenimiento</li>
+      <li>🔒 Alerta de licencia y reutilización</li>
+      <li>🔒 Comparación entre repositorios</li>
+      <li>🔒 Hoja de ruta de instalación</li>
     </ul>
-    <label class="field">License code
-      <input type="text" id="licenseInput" placeholder="e.g. RADAR-XXXX-XXXX">
+    <label class="field">Código de licencia
+      <input type="text" id="licenseInput" placeholder="ej. RADAR-XXXX-XXXX">
     </label>
-    <label class="field">Or your own AI API key
+    <label class="field">O tu propia clave de API de IA
       <input type="password" id="apiKeyInput" placeholder="sk-…">
     </label>
-    <button class="btn btn-premium" id="activateBtn">Activate premium</button>
-    <p class="hint" id="activateMsg">Need a license? <a href="https://oprbguitar.github.io/Hero-radar/#contact" target="_blank" rel="noopener">Contact us for activation</a>.</p>
+    <button class="btn btn-premium" id="activateBtn">Activar premium</button>
+    <p class="hint" id="activateMsg">¿Necesitas una licencia? <a href="mailto:peru.labs.pe@gmail.com?subject=Activaci%C3%B3n%20premium%20—%20Repository%20Tech%20Radar">Escríbenos a peru.labs.pe@gmail.com</a>.</p>
   </div>
 </section>
 
 <footer class="pop-footer">
-  <a href="https://oprbguitar.github.io/Hero-radar/" target="_blank" rel="noopener">Open full dashboard ↗</a>
+  <a href="https://oprbguitar.github.io/Hero-radar/" target="_blank" rel="noopener">Abrir el panel completo ↗</a>
 </footer>
 
 <script src="data.js"></script>

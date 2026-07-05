@@ -1,15 +1,16 @@
-/* Repository Tech Radar — dataset & search layer.
-   Works fully offline with curated data. Each adapter in SOURCE_ADAPTERS can
-   later be pointed at a live API (GitHub, Hugging Face, npm, PyPI, ...) without
-   changing the UI layer. */
+/* Repository Tech Radar — datos y capa de búsqueda.
+   Funciona 100% sin conexión con un índice curado. Cada adaptador de
+   SOURCE_ADAPTERS puede apuntarse más adelante a una API real (GitHub,
+   Hugging Face, npm, PyPI, ...) sin cambiar la capa de interfaz. */
 
 const RADAR_SOURCES = [
   "GitHub", "Hugging Face", "Papers with Code", "npm", "PyPI",
   "Docker Hub", "GitLab", "Product Hunt"
 ];
 
-/* Future integration points. Each entry maps a source to the public API that
-   can replace the mock search. The UI only calls RadarData.search(). */
+/* Puntos de integración futura. Cada entrada asocia una fuente con la API
+   pública que puede sustituir la búsqueda simulada. La interfaz solo llama
+   a RadarData.search(). */
 const SOURCE_ADAPTERS = {
   "GitHub":           { api: "https://api.github.com/search/repositories", live: false },
   "Hugging Face":     { api: "https://huggingface.co/api/models", live: false },
@@ -25,375 +26,375 @@ const RADAR_ITEMS = [
   {
     id: "privategpt", name: "PrivateGPT", source: "GitHub",
     url: "https://github.com/zylon-ai/private-gpt",
-    desc: "Ask questions to your documents with a local LLM. 100% private RAG pipeline that runs without internet access.",
-    tags: ["local rag", "rag", "documents", "privacy", "llm", "offline ai"],
+    desc: "Haz preguntas a tus documentos con un LLM local. Pipeline RAG 100% privado que funciona sin conexión a internet.",
+    tags: ["rag local", "app rag local", "rag", "documentos", "privacidad", "llm", "ia sin conexión"],
     language: "Python", license: "Apache-2.0", updated: "2026-05",
-    stars: 55800, difficulty: "Intermediate", status: "Active",
-    type: "Application", useCase: "Private document Q&A"
+    stars: 55800, difficulty: "Intermedio", status: "Activo",
+    type: "Aplicación", useCase: "Preguntas privadas a documentos"
   },
   {
     id: "anythingllm", name: "AnythingLLM", source: "GitHub",
     url: "https://github.com/Mintplex-Labs/anything-llm",
-    desc: "All-in-one desktop and Docker AI app with built-in RAG, agents and multi-user support. Point it at any LLM.",
-    tags: ["local rag", "rag", "desktop app", "agents", "llm", "chatbot"],
+    desc: "App de IA todo en uno (escritorio y Docker) con RAG integrado, agentes y soporte multiusuario. Conéctala a cualquier LLM.",
+    tags: ["rag local", "app rag local", "rag", "app de escritorio", "agentes", "llm", "chatbot"],
     language: "JavaScript", license: "MIT", updated: "2026-06",
-    stars: 47300, difficulty: "Beginner", status: "Active",
-    type: "Application", useCase: "Turn-key private AI workspace"
+    stars: 47300, difficulty: "Principiante", status: "Activo",
+    type: "Aplicación", useCase: "Espacio de IA privado llave en mano"
   },
   {
     id: "llamaindex", name: "LlamaIndex", source: "PyPI",
     url: "https://pypi.org/project/llama-index/",
-    desc: "Data framework to connect custom data sources to large language models. The standard toolkit for building RAG apps.",
-    tags: ["rag", "local rag", "framework", "llm", "data connectors"],
+    desc: "Framework de datos para conectar fuentes propias a modelos de lenguaje. El kit estándar para construir apps RAG.",
+    tags: ["rag", "rag local", "framework", "llm", "conectores de datos"],
     language: "Python", license: "MIT", updated: "2026-06",
-    stars: 41900, difficulty: "Intermediate", status: "Active",
-    type: "Framework", useCase: "Build custom RAG pipelines"
+    stars: 41900, difficulty: "Intermedio", status: "Activo",
+    type: "Framework", useCase: "Construir pipelines RAG a medida"
   },
   {
     id: "ragflow", name: "RAGFlow", source: "GitHub",
     url: "https://github.com/infiniflow/ragflow",
-    desc: "Open-source RAG engine based on deep document understanding, with templated chunking and grounded citations.",
-    tags: ["local rag", "rag", "document understanding", "citations"],
+    desc: "Motor RAG de código abierto basado en comprensión profunda de documentos, con troceado por plantillas y citas verificables.",
+    tags: ["rag local", "app rag local", "rag", "comprensión de documentos", "citas"],
     language: "Python", license: "Apache-2.0", updated: "2026-06",
-    stars: 52600, difficulty: "Advanced", status: "Active",
-    type: "Application", useCase: "Enterprise document retrieval"
+    stars: 52600, difficulty: "Avanzado", status: "Activo",
+    type: "Aplicación", useCase: "Recuperación documental empresarial"
   },
   {
     id: "marker", name: "Marker", source: "GitHub",
     url: "https://github.com/datalab-to/marker",
-    desc: "Converts PDF to Markdown, JSON and HTML quickly and accurately. Handles tables, equations, code blocks and images.",
-    tags: ["pdf to markdown", "pdf", "markdown", "conversion", "ocr"],
+    desc: "Convierte PDF a Markdown, JSON y HTML con rapidez y precisión. Maneja tablas, fórmulas, bloques de código e imágenes.",
+    tags: ["pdf a markdown", "pdf", "markdown", "conversión", "ocr"],
     language: "Python", license: "GPL-3.0", updated: "2026-05",
-    stars: 24800, difficulty: "Intermediate", status: "Active",
-    type: "Tool", useCase: "Document conversion pipelines"
+    stars: 24800, difficulty: "Intermedio", status: "Activo",
+    type: "Herramienta", useCase: "Pipelines de conversión de documentos"
   },
   {
     id: "docling", name: "Docling", source: "GitHub",
     url: "https://github.com/docling-project/docling",
-    desc: "IBM's toolkit that parses PDF, DOCX, PPTX and images into structured Markdown/JSON, ready for gen-AI workflows.",
-    tags: ["pdf to markdown", "pdf", "document parsing", "markdown", "rag"],
+    desc: "Kit de IBM que convierte PDF, DOCX, PPTX e imágenes en Markdown/JSON estructurado, listo para flujos de IA generativa.",
+    tags: ["pdf a markdown", "pdf", "análisis de documentos", "markdown", "rag"],
     language: "Python", license: "MIT", updated: "2026-06",
-    stars: 31200, difficulty: "Beginner", status: "Active",
-    type: "Library", useCase: "Document ingestion for AI"
+    stars: 31200, difficulty: "Principiante", status: "Activo",
+    type: "Biblioteca", useCase: "Ingesta de documentos para IA"
   },
   {
     id: "pdfplumber", name: "pdfplumber", source: "PyPI",
     url: "https://pypi.org/project/pdfplumber/",
-    desc: "Extracts text, tables and metadata from PDFs with fine-grained control. A dependable building block for PDF tooling.",
-    tags: ["pdf", "pdf to markdown", "extraction", "tables"],
+    desc: "Extrae texto, tablas y metadatos de PDF con control fino. Un bloque de construcción fiable para herramientas PDF.",
+    tags: ["pdf", "pdf a markdown", "extracción", "tablas"],
     language: "Python", license: "MIT", updated: "2026-03",
-    stars: 7600, difficulty: "Beginner", status: "Maintained",
-    type: "Library", useCase: "PDF data extraction"
+    stars: 7600, difficulty: "Principiante", status: "Mantenido",
+    type: "Biblioteca", useCase: "Extracción de datos de PDF"
   },
   {
     id: "mineru", name: "MinerU", source: "GitHub",
     url: "https://github.com/opendatalab/MinerU",
-    desc: "High-quality PDF extraction tool that converts complex scientific and scanned documents into machine-readable Markdown.",
-    tags: ["pdf to markdown", "pdf", "extraction", "scientific documents"],
+    desc: "Herramienta de extracción de PDF de alta calidad que convierte documentos científicos y escaneados complejos en Markdown legible por máquina.",
+    tags: ["pdf a markdown", "pdf", "extracción", "documentos científicos"],
     language: "Python", license: "AGPL-3.0", updated: "2026-06",
-    stars: 33500, difficulty: "Intermediate", status: "Active",
-    type: "Tool", useCase: "Scientific PDF processing"
+    stars: 33500, difficulty: "Intermedio", status: "Activo",
+    type: "Herramienta", useCase: "Procesado de PDF científicos"
   },
   {
     id: "blackstone", name: "Blackstone", source: "GitHub",
     url: "https://github.com/ICLRandD/Blackstone",
-    desc: "spaCy pipeline and NLP models for processing long-form unstructured legal text: case names, citations, instruments.",
-    tags: ["legal document analyzer", "legal", "nlp", "legal tech"],
+    desc: "Pipeline de spaCy y modelos de PLN para procesar texto legal largo y no estructurado: nombres de casos, citas, instrumentos.",
+    tags: ["analizador de documentos legales", "legal", "pln", "legal tech"],
     language: "Python", license: "Apache-2.0", updated: "2021-11",
-    stars: 680, difficulty: "Advanced", status: "Low activity",
-    type: "Library", useCase: "Legal text mining"
+    stars: 680, difficulty: "Avanzado", status: "Poca actividad",
+    type: "Biblioteca", useCase: "Minería de textos legales"
   },
   {
     id: "lexnlp", name: "LexNLP", source: "GitHub",
     url: "https://github.com/LexPredict/lexpredict-lexnlp",
-    desc: "Information retrieval and extraction for real, unstructured legal text: dates, amounts, citations, definitions, durations.",
-    tags: ["legal document analyzer", "legal", "contracts", "extraction", "legal tech"],
+    desc: "Recuperación y extracción de información en texto legal real: fechas, importes, citas, definiciones y plazos.",
+    tags: ["analizador de documentos legales", "legal", "contratos", "extracción", "legal tech"],
     language: "Python", license: "AGPL-3.0", updated: "2023-07",
-    stars: 720, difficulty: "Advanced", status: "Low activity",
-    type: "Library", useCase: "Contract analytics"
+    stars: 720, difficulty: "Avanzado", status: "Poca actividad",
+    type: "Biblioteca", useCase: "Analítica de contratos"
   },
   {
     id: "haystack", name: "Haystack", source: "GitHub",
     url: "https://github.com/deepset-ai/haystack",
-    desc: "Orchestration framework for building production-ready LLM applications: document search, Q&A, agents and RAG.",
-    tags: ["rag", "legal document analyzer", "search", "framework", "llm"],
+    desc: "Framework de orquestación para construir aplicaciones LLM listas para producción: búsqueda documental, Q&A, agentes y RAG.",
+    tags: ["rag", "analizador de documentos legales", "búsqueda", "framework", "llm"],
     language: "Python", license: "Apache-2.0", updated: "2026-06",
-    stars: 21500, difficulty: "Intermediate", status: "Active",
-    type: "Framework", useCase: "Production LLM pipelines"
+    stars: 21500, difficulty: "Intermedio", status: "Activo",
+    type: "Framework", useCase: "Pipelines LLM en producción"
   },
   {
     id: "webllm", name: "WebLLM", source: "npm",
     url: "https://www.npmjs.com/package/@mlc-ai/web-llm",
-    desc: "High-performance in-browser LLM inference engine with WebGPU. Run chat models inside a web page or extension, no server.",
-    tags: ["ai chrome extension", "browser ai", "webgpu", "llm", "inference"],
+    desc: "Motor de inferencia LLM de alto rendimiento en el navegador con WebGPU. Ejecuta modelos de chat dentro de una web o extensión, sin servidor.",
+    tags: ["extensión chrome ia", "ia en el navegador", "webgpu", "llm", "inferencia"],
     language: "TypeScript", license: "Apache-2.0", updated: "2026-04",
-    stars: 15900, difficulty: "Advanced", status: "Active",
-    type: "Library", useCase: "In-browser AI features"
+    stars: 15900, difficulty: "Avanzado", status: "Activo",
+    type: "Biblioteca", useCase: "Funciones de IA en el navegador"
   },
   {
     id: "transformersjs", name: "Transformers.js", source: "Hugging Face",
     url: "https://huggingface.co/docs/transformers.js",
-    desc: "Run Hugging Face transformer models directly in the browser or Node.js — text, vision and audio tasks without a backend.",
-    tags: ["ai chrome extension", "browser ai", "machine learning", "javascript"],
+    desc: "Ejecuta modelos transformer de Hugging Face directamente en el navegador o Node.js — texto, visión y audio sin backend.",
+    tags: ["extensión chrome ia", "ia en el navegador", "machine learning", "javascript"],
     language: "JavaScript", license: "Apache-2.0", updated: "2026-06",
-    stars: 14200, difficulty: "Intermediate", status: "Active",
-    type: "Library", useCase: "Client-side ML inference"
+    stars: 14200, difficulty: "Intermedio", status: "Activo",
+    type: "Biblioteca", useCase: "Inferencia ML en el cliente"
   },
   {
     id: "plasmo", name: "Plasmo", source: "npm",
     url: "https://www.npmjs.com/package/plasmo",
-    desc: "Battery-packed framework for building modern Chrome extensions with React/TypeScript, live-reload and store deployment.",
-    tags: ["ai chrome extension", "chrome extension", "framework", "browser"],
+    desc: "Framework completo para crear extensiones de Chrome modernas con React/TypeScript, recarga en vivo y despliegue a la tienda.",
+    tags: ["extensión chrome ia", "extensión chrome", "framework", "navegador"],
     language: "TypeScript", license: "MIT", updated: "2026-02",
-    stars: 12100, difficulty: "Intermediate", status: "Maintained",
-    type: "Framework", useCase: "Ship browser extensions fast"
+    stars: 12100, difficulty: "Intermedio", status: "Mantenido",
+    type: "Framework", useCase: "Publicar extensiones rápido"
   },
   {
     id: "tesseractjs", name: "Tesseract.js", source: "npm",
     url: "https://www.npmjs.com/package/tesseract.js",
-    desc: "Pure-JavaScript OCR for 100+ languages. Runs offline in the browser or Node.js — no cloud service required.",
-    tags: ["offline ocr", "ocr", "text recognition", "javascript"],
+    desc: "OCR en JavaScript puro para más de 100 idiomas. Funciona sin conexión en el navegador o Node.js — sin servicios en la nube.",
+    tags: ["ocr sin conexión", "ocr", "reconocimiento de texto", "javascript"],
     language: "JavaScript", license: "Apache-2.0", updated: "2026-01",
-    stars: 37200, difficulty: "Beginner", status: "Maintained",
-    type: "Library", useCase: "OCR inside web apps"
+    stars: 37200, difficulty: "Principiante", status: "Mantenido",
+    type: "Biblioteca", useCase: "OCR dentro de apps web"
   },
   {
     id: "easyocr", name: "EasyOCR", source: "PyPI",
     url: "https://pypi.org/project/easyocr/",
-    desc: "Ready-to-use OCR with 80+ supported languages, including Latin, Chinese, Arabic and Cyrillic scripts. Works fully offline.",
-    tags: ["offline ocr", "ocr", "deep learning", "multilingual"],
+    desc: "OCR listo para usar con más de 80 idiomas, incluidos alfabetos latino, chino, árabe y cirílico. Funciona totalmente sin conexión.",
+    tags: ["ocr sin conexión", "ocr", "deep learning", "multilingüe"],
     language: "Python", license: "Apache-2.0", updated: "2025-10",
-    stars: 26400, difficulty: "Beginner", status: "Maintained",
-    type: "Library", useCase: "Offline text extraction"
+    stars: 26400, difficulty: "Principiante", status: "Mantenido",
+    type: "Biblioteca", useCase: "Extracción de texto sin conexión"
   },
   {
     id: "paddleocr", name: "PaddleOCR", source: "GitHub",
     url: "https://github.com/PaddlePaddle/PaddleOCR",
-    desc: "Industrial-grade multilingual OCR toolkit: ultra-lightweight models, layout analysis, table and formula recognition.",
-    tags: ["offline ocr", "ocr", "layout analysis", "production"],
+    desc: "Kit OCR multilingüe de nivel industrial: modelos ultraligeros, análisis de layout, reconocimiento de tablas y fórmulas.",
+    tags: ["ocr sin conexión", "ocr", "análisis de layout", "producción"],
     language: "Python", license: "Apache-2.0", updated: "2026-06",
-    stars: 47900, difficulty: "Intermediate", status: "Active",
-    type: "Tool", useCase: "Production OCR at scale"
+    stars: 47900, difficulty: "Intermedio", status: "Activo",
+    type: "Herramienta", useCase: "OCR de producción a escala"
   },
   {
     id: "surya", name: "Surya", source: "GitHub",
     url: "https://github.com/datalab-to/surya",
-    desc: "Document OCR in 90+ languages with line-level detection, layout analysis, reading order and table recognition.",
-    tags: ["offline ocr", "ocr", "document analysis", "layout"],
+    desc: "OCR de documentos en más de 90 idiomas con detección por líneas, análisis de layout, orden de lectura y reconocimiento de tablas.",
+    tags: ["ocr sin conexión", "ocr", "análisis de documentos", "layout"],
     language: "Python", license: "GPL-3.0", updated: "2026-04",
-    stars: 17800, difficulty: "Intermediate", status: "Active",
-    type: "Tool", useCase: "Modern document OCR"
+    stars: 17800, difficulty: "Intermedio", status: "Activo",
+    type: "Herramienta", useCase: "OCR documental moderno"
   },
   {
     id: "sheetjs", name: "SheetJS", source: "npm",
     url: "https://www.npmjs.com/package/xlsx",
-    desc: "Read, edit and generate Excel spreadsheets from JavaScript. The de-facto standard for XLSX processing in web apps.",
-    tags: ["excel dashboard generator", "excel", "spreadsheets", "export"],
+    desc: "Lee, edita y genera hojas de cálculo Excel desde JavaScript. El estándar de facto para procesar XLSX en aplicaciones web.",
+    tags: ["dashboard excel", "generador de dashboards excel", "excel", "hojas de cálculo", "exportación"],
     language: "JavaScript", license: "Apache-2.0", updated: "2026-03",
-    stars: 36100, difficulty: "Beginner", status: "Maintained",
-    type: "Library", useCase: "Excel import/export in apps"
+    stars: 36100, difficulty: "Principiante", status: "Mantenido",
+    type: "Biblioteca", useCase: "Importar/exportar Excel en apps"
   },
   {
     id: "streamlit", name: "Streamlit", source: "PyPI",
     url: "https://pypi.org/project/streamlit/",
-    desc: "Turn Python scripts into interactive data dashboards and web apps in minutes — charts, tables, filters, file upload.",
-    tags: ["excel dashboard generator", "dashboard", "data apps", "visualization"],
+    desc: "Convierte scripts de Python en dashboards y apps web interactivas en minutos — gráficos, tablas, filtros y carga de archivos.",
+    tags: ["dashboard excel", "generador de dashboards excel", "dashboard", "apps de datos", "visualización"],
     language: "Python", license: "Apache-2.0", updated: "2026-06",
-    stars: 38700, difficulty: "Beginner", status: "Active",
-    type: "Framework", useCase: "Rapid internal dashboards"
+    stars: 38700, difficulty: "Principiante", status: "Activo",
+    type: "Framework", useCase: "Dashboards internos rápidos"
   },
   {
     id: "mito", name: "Mito", source: "GitHub",
     url: "https://github.com/mito-ds/mito",
-    desc: "Spreadsheet interface inside Jupyter: edit like Excel, get the equivalent Python generated automatically for each step.",
-    tags: ["excel dashboard generator", "excel", "spreadsheets", "python", "automation"],
+    desc: "Interfaz de hoja de cálculo dentro de Jupyter: edita como en Excel y obtén automáticamente el Python equivalente de cada paso.",
+    tags: ["dashboard excel", "generador de dashboards excel", "excel", "hojas de cálculo", "python", "automatización"],
     language: "Python", license: "AGPL-3.0", updated: "2026-02",
-    stars: 2400, difficulty: "Beginner", status: "Maintained",
-    type: "Tool", useCase: "Excel-to-Python workflows"
+    stars: 2400, difficulty: "Principiante", status: "Mantenido",
+    type: "Herramienta", useCase: "Flujos de Excel a Python"
   },
   {
     id: "rasa", name: "Rasa", source: "GitHub",
     url: "https://github.com/RasaHQ/rasa",
-    desc: "Open-source machine learning framework to build contextual chat and voice assistants you can self-host and control.",
-    tags: ["open-source chatbot", "chatbot", "nlu", "conversational ai"],
+    desc: "Framework de machine learning de código abierto para crear asistentes de chat y voz contextuales que puedes autoalojar y controlar.",
+    tags: ["chatbot open source", "chatbot", "nlu", "ia conversacional"],
     language: "Python", license: "Apache-2.0", updated: "2026-05",
-    stars: 19900, difficulty: "Advanced", status: "Active",
-    type: "Framework", useCase: "Self-hosted assistants"
+    stars: 19900, difficulty: "Avanzado", status: "Activo",
+    type: "Framework", useCase: "Asistentes autoalojados"
   },
   {
     id: "librechat", name: "LibreChat", source: "GitHub",
     url: "https://github.com/danny-avila/LibreChat",
-    desc: "Enhanced self-hosted ChatGPT-style interface supporting many AI providers, agents, file chat and multi-user auth.",
-    tags: ["open-source chatbot", "chatbot", "chat ui", "self-hosted", "llm"],
+    desc: "Interfaz autoalojada estilo ChatGPT mejorada, compatible con múltiples proveedores de IA, agentes, chat con archivos y autenticación multiusuario.",
+    tags: ["chatbot open source", "chatbot", "interfaz de chat", "autoalojado", "llm"],
     language: "TypeScript", license: "MIT", updated: "2026-06",
-    stars: 28400, difficulty: "Intermediate", status: "Active",
-    type: "Application", useCase: "Company-internal AI chat"
+    stars: 28400, difficulty: "Intermedio", status: "Activo",
+    type: "Aplicación", useCase: "Chat de IA interno de empresa"
   },
   {
     id: "botpress", name: "Botpress", source: "GitHub",
     url: "https://github.com/botpress/botpress",
-    desc: "Platform for building chatbots and AI agents with a visual studio, integrations, and an open-source core.",
-    tags: ["open-source chatbot", "chatbot", "agents", "no-code"],
+    desc: "Plataforma para construir chatbots y agentes de IA con un estudio visual, integraciones y núcleo de código abierto.",
+    tags: ["chatbot open source", "chatbot", "agentes", "no-code"],
     language: "TypeScript", license: "MIT", updated: "2026-05",
-    stars: 13800, difficulty: "Intermediate", status: "Active",
-    type: "Application", useCase: "Customer-facing bots"
+    stars: 13800, difficulty: "Intermedio", status: "Activo",
+    type: "Aplicación", useCase: "Bots de atención al cliente"
   },
   {
     id: "whisper", name: "Whisper", source: "GitHub",
     url: "https://github.com/openai/whisper",
-    desc: "Robust general-purpose speech recognition model. Multilingual transcription and translation from audio to text.",
-    tags: ["speech to text", "transcription", "audio", "asr"],
+    desc: "Modelo robusto de reconocimiento de voz de propósito general. Transcripción y traducción multilingüe de audio a texto.",
+    tags: ["voz a texto", "transcripción", "audio", "asr"],
     language: "Python", license: "MIT", updated: "2025-12",
-    stars: 74600, difficulty: "Intermediate", status: "Maintained",
-    type: "Model", useCase: "Audio transcription"
+    stars: 74600, difficulty: "Intermedio", status: "Mantenido",
+    type: "Modelo", useCase: "Transcripción de audio"
   },
   {
     id: "fasterwhisper", name: "faster-whisper", source: "PyPI",
     url: "https://pypi.org/project/faster-whisper/",
-    desc: "Reimplementation of Whisper using CTranslate2 — up to 4x faster with the same accuracy and lower memory use.",
-    tags: ["speech to text", "transcription", "performance", "asr"],
+    desc: "Reimplementación de Whisper con CTranslate2 — hasta 4 veces más rápido con la misma precisión y menos memoria.",
+    tags: ["voz a texto", "transcripción", "rendimiento", "asr"],
     language: "Python", license: "MIT", updated: "2026-04",
-    stars: 14700, difficulty: "Intermediate", status: "Active",
-    type: "Library", useCase: "Fast production transcription"
+    stars: 14700, difficulty: "Intermedio", status: "Activo",
+    type: "Biblioteca", useCase: "Transcripción rápida en producción"
   },
   {
     id: "whispercpp", name: "whisper.cpp", source: "GitHub",
     url: "https://github.com/ggml-org/whisper.cpp",
-    desc: "Plain C/C++ port of Whisper. Runs speech-to-text on laptops, phones and Raspberry Pi with no Python dependency.",
-    tags: ["speech to text", "transcription", "edge", "offline ai"],
+    desc: "Port de Whisper en C/C++ puro. Voz a texto en portátiles, móviles y Raspberry Pi sin depender de Python.",
+    tags: ["voz a texto", "transcripción", "edge", "ia sin conexión"],
     language: "C++", license: "MIT", updated: "2026-06",
-    stars: 39800, difficulty: "Advanced", status: "Active",
-    type: "Library", useCase: "On-device transcription"
+    stars: 39800, difficulty: "Avanzado", status: "Activo",
+    type: "Biblioteca", useCase: "Transcripción en el dispositivo"
   },
   {
     id: "whisperweb", name: "Whisper Web", source: "Hugging Face",
     url: "https://huggingface.co/spaces/Xenova/whisper-web",
-    desc: "Hugging Face Space that runs Whisper speech recognition entirely in your browser via Transformers.js. Try it instantly.",
-    tags: ["speech to text", "browser ai", "demo", "hugging face space"],
+    desc: "Space de Hugging Face que ejecuta el reconocimiento de voz Whisper íntegramente en tu navegador con Transformers.js. Pruébalo al instante.",
+    tags: ["voz a texto", "ia en el navegador", "demo", "space de hugging face"],
     language: "JavaScript", license: "MIT", updated: "2025-09",
-    stars: 4900, difficulty: "Beginner", status: "Maintained",
-    type: "Demo Space", useCase: "Instant browser transcription"
+    stars: 4900, difficulty: "Principiante", status: "Mantenido",
+    type: "Space demo", useCase: "Transcripción instantánea en el navegador"
   },
   {
     id: "vosk", name: "Vosk", source: "PyPI",
     url: "https://pypi.org/project/vosk/",
-    desc: "Offline speech recognition toolkit for 20+ languages with small models that run on Android, Raspberry Pi and servers.",
-    tags: ["speech to text", "offline ai", "asr", "embedded"],
+    desc: "Kit de reconocimiento de voz sin conexión para más de 20 idiomas, con modelos pequeños que corren en Android, Raspberry Pi y servidores.",
+    tags: ["voz a texto", "ia sin conexión", "asr", "embebido"],
     language: "Python", license: "Apache-2.0", updated: "2025-08",
-    stars: 9700, difficulty: "Intermediate", status: "Maintained",
-    type: "Library", useCase: "Offline voice interfaces"
+    stars: 9700, difficulty: "Intermedio", status: "Mantenido",
+    type: "Biblioteca", useCase: "Interfaces de voz sin conexión"
   },
   {
     id: "renovate", name: "Renovate", source: "npm",
     url: "https://www.npmjs.com/package/renovate",
-    desc: "Automated dependency updates for repositories. Monitors your codebase and opens pull requests when packages change.",
-    tags: ["repository monitoring", "dependencies", "automation", "devops"],
+    desc: "Actualización automática de dependencias. Monitorea tu código y abre pull requests cuando los paquetes cambian.",
+    tags: ["monitoreo de repositorios", "dependencias", "automatización", "devops"],
     language: "TypeScript", license: "AGPL-3.0", updated: "2026-06",
-    stars: 18900, difficulty: "Intermediate", status: "Active",
-    type: "Tool", useCase: "Keep dependencies fresh"
+    stars: 18900, difficulty: "Intermedio", status: "Activo",
+    type: "Herramienta", useCase: "Mantener dependencias al día"
   },
   {
     id: "scorecard", name: "OpenSSF Scorecard", source: "GitHub",
     url: "https://github.com/ossf/scorecard",
-    desc: "Automated security health checks for open-source repositories: maintenance, vulnerabilities, CI, licensing signals.",
-    tags: ["repository monitoring", "security", "risk", "open source health"],
+    desc: "Chequeos automáticos de salud y seguridad para repositorios de código abierto: mantenimiento, vulnerabilidades, CI y licencias.",
+    tags: ["monitoreo de repositorios", "seguridad", "riesgo", "salud open source"],
     language: "Go", license: "Apache-2.0", updated: "2026-06",
-    stars: 5100, difficulty: "Intermediate", status: "Active",
-    type: "Tool", useCase: "Evaluate repo trustworthiness"
+    stars: 5100, difficulty: "Intermedio", status: "Activo",
+    type: "Herramienta", useCase: "Evaluar la confiabilidad de un repo"
   },
   {
     id: "huginn", name: "Huginn", source: "GitHub",
     url: "https://github.com/huginn/huginn",
-    desc: "Self-hosted agents that monitor websites, feeds and events for you, then act on them — an open IFTTT you control.",
-    tags: ["repository monitoring", "workflow automation", "agents", "monitoring"],
+    desc: "Agentes autoalojados que vigilan webs, feeds y eventos por ti, y luego actúan — un IFTTT abierto que tú controlas.",
+    tags: ["monitoreo de repositorios", "automatización de flujos", "agentes", "monitoreo"],
     language: "Ruby", license: "MIT", updated: "2026-03",
-    stars: 46200, difficulty: "Advanced", status: "Maintained",
-    type: "Application", useCase: "Watch the web for changes"
+    stars: 46200, difficulty: "Avanzado", status: "Mantenido",
+    type: "Aplicación", useCase: "Vigilar cambios en la web"
   },
   {
     id: "n8n", name: "n8n", source: "GitHub",
     url: "https://github.com/n8n-io/n8n",
-    desc: "Fair-code workflow automation platform with native AI capabilities and 400+ integrations. Visual builder plus code.",
-    tags: ["workflow automation", "automation", "integrations", "ai agents"],
+    desc: "Plataforma fair-code de automatización de flujos con capacidades nativas de IA y más de 400 integraciones. Editor visual más código.",
+    tags: ["automatización de flujos", "automatización", "integraciones", "agentes de ia"],
     language: "TypeScript", license: "Sustainable Use", updated: "2026-06",
-    stars: 98400, difficulty: "Beginner", status: "Active",
-    type: "Application", useCase: "Automate business workflows"
+    stars: 98400, difficulty: "Principiante", status: "Activo",
+    type: "Aplicación", useCase: "Automatizar flujos de negocio"
   },
   {
     id: "activepieces", name: "Activepieces", source: "GitHub",
     url: "https://github.com/activepieces/activepieces",
-    desc: "Open-source AI automation: no-code flow builder with hundreds of pieces, self-hostable alternative to Zapier.",
-    tags: ["workflow automation", "automation", "no-code", "self-hosted"],
+    desc: "Automatización con IA de código abierto: editor de flujos sin código con cientos de piezas, alternativa autoalojable a Zapier.",
+    tags: ["automatización de flujos", "automatización", "no-code", "autoalojado"],
     language: "TypeScript", license: "MIT", updated: "2026-06",
-    stars: 12600, difficulty: "Beginner", status: "Active",
-    type: "Application", useCase: "No-code task automation"
+    stars: 12600, difficulty: "Principiante", status: "Activo",
+    type: "Aplicación", useCase: "Automatización sin código"
   },
   {
     id: "windmill", name: "Windmill", source: "GitLab",
     url: "https://github.com/windmill-labs/windmill",
-    desc: "Developer platform to turn scripts into workflows, internal apps and scheduled jobs. Polyglot: Python, TS, Go, Bash.",
-    tags: ["workflow automation", "automation", "internal tools", "scripts"],
+    desc: "Plataforma para convertir scripts en flujos de trabajo, apps internas y tareas programadas. Políglota: Python, TS, Go, Bash.",
+    tags: ["automatización de flujos", "automatización", "herramientas internas", "scripts"],
     language: "Rust", license: "AGPL-3.0", updated: "2026-06",
-    stars: 11900, difficulty: "Intermediate", status: "Active",
-    type: "Platform", useCase: "Script-first automation"
+    stars: 11900, difficulty: "Intermedio", status: "Activo",
+    type: "Plataforma", useCase: "Automatización basada en scripts"
   },
   {
     id: "ollama", name: "Ollama", source: "Docker Hub",
     url: "https://hub.docker.com/r/ollama/ollama",
-    desc: "Run Llama, Mistral, Gemma and other open models locally with one command. Official Docker image with GPU support.",
-    tags: ["local rag", "llm", "offline ai", "docker", "inference"],
+    desc: "Ejecuta Llama, Mistral, Gemma y otros modelos abiertos en local con un solo comando. Imagen Docker oficial con soporte GPU.",
+    tags: ["rag local", "llm", "ia sin conexión", "docker", "inferencia"],
     language: "Go", license: "MIT", updated: "2026-06",
-    stars: 152000, difficulty: "Beginner", status: "Active",
-    type: "Application", useCase: "Local model runtime"
+    stars: 152000, difficulty: "Principiante", status: "Activo",
+    type: "Aplicación", useCase: "Runtime de modelos en local"
   },
   {
     id: "qdrant", name: "Qdrant", source: "Docker Hub",
     url: "https://hub.docker.com/r/qdrant/qdrant",
-    desc: "High-performance vector database and similarity search engine. The retrieval backbone for RAG and recommendation apps.",
-    tags: ["local rag", "rag", "vector database", "search", "docker"],
+    desc: "Base de datos vectorial y motor de búsqueda por similitud de alto rendimiento. La columna vertebral de recuperación para apps RAG.",
+    tags: ["rag local", "rag", "base de datos vectorial", "búsqueda", "docker"],
     language: "Rust", license: "Apache-2.0", updated: "2026-05",
-    stars: 25300, difficulty: "Intermediate", status: "Active",
-    type: "Service", useCase: "Vector search backend"
+    stars: 25300, difficulty: "Intermedio", status: "Activo",
+    type: "Servicio", useCase: "Backend de búsqueda vectorial"
   },
   {
     id: "sam", name: "Segment Anything (SAM)", source: "Papers with Code",
     url: "https://paperswithcode.com/paper/segment-anything",
-    desc: "Foundation model for image segmentation with zero-shot generalization. Paper, benchmarks and official code linked.",
-    tags: ["computer vision", "segmentation", "foundation model", "research"],
+    desc: "Modelo fundacional de segmentación de imágenes con generalización zero-shot. Paper, benchmarks y código oficial enlazados.",
+    tags: ["visión por computador", "segmentación", "modelo fundacional", "investigación"],
     language: "Python", license: "Apache-2.0", updated: "2024-07",
-    stars: 51700, difficulty: "Advanced", status: "Maintained",
-    type: "Model", useCase: "Image segmentation research"
+    stars: 51700, difficulty: "Avanzado", status: "Mantenido",
+    type: "Modelo", useCase: "Investigación en segmentación"
   },
   {
     id: "sentencetransformers", name: "Sentence Transformers", source: "Hugging Face",
     url: "https://huggingface.co/sentence-transformers",
-    desc: "State-of-the-art text embeddings for semantic search, clustering and retrieval. Hundreds of ready-to-use models.",
-    tags: ["local rag", "embeddings", "semantic search", "nlp"],
+    desc: "Embeddings de texto de última generación para búsqueda semántica, clustering y recuperación. Cientos de modelos listos para usar.",
+    tags: ["rag local", "embeddings", "búsqueda semántica", "pln"],
     language: "Python", license: "Apache-2.0", updated: "2026-05",
-    stars: 16800, difficulty: "Intermediate", status: "Active",
-    type: "Library", useCase: "Semantic search embeddings"
+    stars: 16800, difficulty: "Intermedio", status: "Activo",
+    type: "Biblioteca", useCase: "Embeddings para búsqueda semántica"
   },
   {
     id: "gitlab", name: "GitLab CE", source: "GitLab",
     url: "https://gitlab.com/gitlab-org/gitlab",
-    desc: "Complete DevSecOps platform: repositories, CI/CD, issue tracking and monitoring in a single self-hostable package.",
-    tags: ["repository monitoring", "devops", "ci/cd", "self-hosted"],
+    desc: "Plataforma DevSecOps completa: repositorios, CI/CD, gestión de incidencias y monitoreo en un solo paquete autoalojable.",
+    tags: ["monitoreo de repositorios", "devops", "ci/cd", "autoalojado"],
     language: "Ruby", license: "MIT", updated: "2026-06",
-    stars: 24600, difficulty: "Advanced", status: "Active",
-    type: "Platform", useCase: "Self-hosted DevOps"
+    stars: 24600, difficulty: "Avanzado", status: "Activo",
+    type: "Plataforma", useCase: "DevOps autoalojado"
   },
   {
     id: "langchain", name: "LangChain", source: "GitHub",
     url: "https://github.com/langchain-ai/langchain",
-    desc: "Framework for developing applications powered by language models: chains, agents, tools and retrieval components.",
-    tags: ["rag", "local rag", "framework", "agents", "llm"],
+    desc: "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje: cadenas, agentes, herramientas y componentes de recuperación.",
+    tags: ["rag", "rag local", "framework", "agentes", "llm"],
     language: "Python", license: "MIT", updated: "2026-06",
-    stars: 113000, difficulty: "Intermediate", status: "Active",
-    type: "Framework", useCase: "LLM app development"
+    stars: 113000, difficulty: "Intermedio", status: "Activo",
+    type: "Framework", useCase: "Desarrollo de apps con LLM"
   }
 ];
 
-/* ---- search layer (mock adapter, same signature a live adapter will use) ---- */
+/* ---- capa de búsqueda (adaptador simulado, misma firma que uno real) ---- */
 
 const RadarData = {
   sources: RADAR_SOURCES,
@@ -403,7 +404,10 @@ const RadarData = {
   search(query, filters) {
     filters = filters || {};
     const q = (query || "").trim().toLowerCase();
-    const STOP = new Set(["to", "of", "for", "the", "a", "an", "and", "in", "on", "with", "my"]);
+    const STOP = new Set([
+      "to", "of", "for", "the", "a", "an", "and", "in", "on", "with", "my",
+      "de", "la", "el", "los", "las", "un", "una", "para", "con", "en", "y", "o", "que", "es", "mi"
+    ]);
     const terms = q.split(/\s+/).filter(t => t && !STOP.has(t));
 
     let results = RADAR_ITEMS.map(item => {
@@ -416,7 +420,7 @@ const RadarData = {
         if (item.tags.some(tag => tag.includes(t))) score += 6;
         if (hay.includes(t)) score += 2;
       });
-      // a desc-only brush against one word is noise, not a match
+      // un roce de una sola palabra en la descripción es ruido, no una coincidencia
       return { item, score: terms.length && score < 5 ? 0 : (terms.length ? score : 1) };
     }).filter(r => r.score > 0);
 
@@ -441,8 +445,8 @@ const RadarData = {
       source: collect("source"),
       language: collect("language"),
       license: collect("license"),
-      status: ["Active", "Maintained", "Low activity"],
-      difficulty: ["Beginner", "Intermediate", "Advanced"],
+      status: ["Activo", "Mantenido", "Poca actividad"],
+      difficulty: ["Principiante", "Intermedio", "Avanzado"],
       type: collect("type"),
       useCase: collect("useCase")
     };

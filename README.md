@@ -1,61 +1,102 @@
 # Repository Tech Radar
 
-**Find, compare, understand and reuse open-source technology faster.**
+**Encuentra, compara, entiende y reutiliza tecnología open source más rápido.**
 
-Repository Tech Radar is a commercial demo: a smart multi-source search and AI analysis
-tool for GitHub repositories, AI projects, open-source libraries, frameworks, datasets,
-Hugging Face spaces, npm/PyPI packages, Docker images and other public developer resources.
+🌐 **Sitio en vivo:** <https://oprbguitar.github.io/Hero-radar/>
 
-## What's inside
+Repository Tech Radar es una demo comercial: una herramienta de búsqueda multi-fuente y
+análisis con IA para repositorios de GitHub, proyectos de IA, bibliotecas de código
+abierto, frameworks, datasets, spaces de Hugging Face, paquetes de npm/PyPI, imágenes
+Docker y otros recursos públicos para desarrolladores.
 
-| Path | Description |
+---
+
+## 📑 Índice
+
+1. [Enlaces rápidos](#-enlaces-rápidos)
+2. [Modelo de negocio](#-modelo-de-negocio)
+3. [Estructura del proyecto](#-estructura-del-proyecto)
+4. [Ejecutar en local](#-ejecutar-en-local)
+5. [Instalar la extensión de Chrome](#-instalar-la-extensión-de-chrome)
+6. [Fuentes de datos e integración futura](#-fuentes-de-datos-e-integración-futura)
+7. [Despliegue en GitHub Pages](#-despliegue-en-github-pages)
+8. [Contacto y activación premium](#-contacto-y-activación-premium)
+
+---
+
+## 🔗 Enlaces rápidos
+
+| Recurso | Enlace |
+|---------|--------|
+| Página pública (landing + demo) | <https://oprbguitar.github.io/Hero-radar/> |
+| Demo de búsqueda gratuita | <https://oprbguitar.github.io/Hero-radar/#demo> |
+| Sección premium (IA) | <https://oprbguitar.github.io/Hero-radar/#premium> |
+| Descarga de la extensión (ZIP) | <https://oprbguitar.github.io/Hero-radar/downloads/repository-tech-radar-extension.zip> |
+| Contacto y activación | <https://oprbguitar.github.io/Hero-radar/#contact> |
+
+## 💼 Modelo de negocio
+
+- **Modo gratis** — búsqueda multi-fuente por palabra clave con filtros (fuente,
+  lenguaje, licencia, estado, dificultad, tipo, caso de uso), tarjetas de resultados
+  organizadas, enlaces a la fuente y exportación a CSV / JSON / Markdown / informe PDF.
+- **Modo premium** — la capa de análisis con IA: resúmenes del repositorio en lenguaje
+  claro, viabilidad técnica, revisión de riesgo y mantenimiento, alertas de licencia,
+  comparaciones entre repositorios, casos de uso de negocio, hojas de ruta de
+  instalación y recomendación de «la mejor herramienta para mi caso». Se activa con un
+  código de licencia o con la clave de API de IA del propio usuario.
+
+## 📁 Estructura del proyecto
+
+| Ruta | Descripción |
 |------|-------------|
-| `index.html` | Public landing page with the interactive free demo, premium AI section, extension download and contact/activation area |
-| `assets/` | Styles, page logic and the curated dataset / mock search layer |
-| `extension/` | Chrome extension (Manifest V3): search, save, classify, favorite, export and premium AI panel |
-| `downloads/repository-tech-radar-extension.zip` | Ready-to-download extension package linked from the landing page |
+| `index.html` | Página pública con la demo interactiva gratuita, la sección premium de IA, la descarga de la extensión y el área de contacto/activación |
+| `assets/css/style.css` | Estilos del panel (tema oscuro, responsive) |
+| `assets/js/data.js` | Índice curado de proyectos + capa de búsqueda simulada |
+| `assets/js/app.js` | Lógica de la página: búsqueda, filtros, exportaciones, modal premium |
+| `extension/` | Extensión de Chrome (Manifest V3): buscar, guardar, clasificar, favoritos, exportar y panel premium de IA |
+| `downloads/repository-tech-radar-extension.zip` | Paquete de la extensión listo para descargar, enlazado desde la página |
 
-## Business model
+## 🖥 Ejecutar en local
 
-- **Free mode** — multi-source keyword search with filters (source, language, license,
-  status, difficulty, type, use case), organized result cards, source links and
-  CSV / JSON / Markdown / PDF-report exports.
-- **Premium mode** — the AI analysis layer: plain-language repository summaries,
-  feasibility and risk review, license warnings, comparisons, business use cases,
-  installation roadmaps and "best tool for my need" recommendations. Activates with a
-  license code or the user's own AI API key.
-
-## Run locally
-
-It is a fully static site — open `index.html` in a browser, or serve it:
+Es un sitio 100% estático — abre `index.html` en el navegador, o sírvelo:
 
 ```bash
 python3 -m http.server 8000
-# then open http://localhost:8000
+# luego abre http://localhost:8000
 ```
 
-## Deploy on GitHub Pages
+## 🧩 Instalar la extensión de Chrome
 
-Enable GitHub Pages for the repository (Settings → Pages → deploy from the `main` branch,
-root folder). No build step or backend is required.
+1. Descarga [`repository-tech-radar-extension.zip`](https://oprbguitar.github.io/Hero-radar/downloads/repository-tech-radar-extension.zip) (o usa la carpeta `extension/` directamente).
+2. Descomprímelo, abre `chrome://extensions` y activa el **Modo de desarrollador**.
+3. Haz clic en **Cargar descomprimida** y selecciona la carpeta `extension`.
+4. Fija **Repository Tech Radar** en la barra de herramientas.
 
-## Install the extension
+Funciona en Chrome, Edge, Brave y otros navegadores Chromium. El modo gratuito no requiere cuenta.
 
-1. Download `downloads/repository-tech-radar-extension.zip` (or use the `extension/` folder directly).
-2. Unzip it, open `chrome://extensions` and enable **Developer mode**.
-3. Click **Load unpacked** and select the `extension` folder.
-4. Pin **Repository Tech Radar** to the toolbar.
+## 🔌 Fuentes de datos e integración futura
 
-## Data sources & future API integration
+La demo funciona con un índice curado sin conexión, por lo que corre en cualquier parte
+(incluido GitHub Pages) sin claves. La capa de búsqueda (`assets/js/data.js` /
+`extension/data.js`) expone un único punto de entrada `RadarData.search(query, filters)`
+más un mapa `SOURCE_ADAPTERS` con el endpoint de API pública de cada fuente, para activar
+adaptadores en vivo fuente por fuente sin tocar la interfaz:
 
-The demo runs on a curated offline index so it works anywhere, including GitHub Pages,
-with no keys. The search layer (`assets/js/data.js` / `extension/data.js`) exposes a
-single `RadarData.search(query, filters)` entry point plus a `SOURCE_ADAPTERS` map with
-the public API endpoint for each source (GitHub, Hugging Face, Papers with Code, npm,
-PyPI, Docker Hub, GitLab, Product Hunt), so live adapters can be switched on per source
-without touching the UI.
+- GitHub · Hugging Face · Papers with Code · npm · PyPI · Docker Hub · GitLab · Product Hunt
 
-## Premium activation
+## 🚀 Despliegue en GitHub Pages
 
-Premium is presented as a paid layer. Contact placeholders (email, WhatsApp, license
-code) live in the landing page's contact section and in the extension's Premium tab.
+El sitio ya está publicado en <https://oprbguitar.github.io/Hero-radar/> desde la rama
+`main` (carpeta raíz). No requiere backend ni paso de compilación: cada push a `main`
+vuelve a desplegar automáticamente.
+
+## 📬 Contacto y activación premium
+
+- ✉️ **Email:** [peru.labs.pe@gmail.com](mailto:peru.labs.pe@gmail.com)
+- 🔑 **Código de licencia:** se ingresa en la pestaña Premium de la extensión
+- El análisis premium funciona con tu propia clave de API o con una configuración premium activada para ti.
+
+---
+
+Los resultados de la demo son un índice curado de proyectos públicos de código abierto;
+los nombres y enlaces pertenecen a sus respectivos dueños.
